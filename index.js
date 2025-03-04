@@ -12,7 +12,6 @@ app.use(cors())
 
 //TODO  Rutas
 //app.use("/saludar",SaludarRoutes)
-
 //app.use("/despedir",DespedirRoutes)
 
 
