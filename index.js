@@ -2,8 +2,9 @@
 //! const DespedirRoutes = require("./routes/despedir.routes")
 
 const ProductRoutes = require('./routes/products.routes')
+const { AppDataSource } = require('./data/source');
 const express = require('express')
-const cors = require('cors')
+const cors = require('cors');
 const port = 3000;
 
 const app = express()
@@ -20,4 +21,12 @@ app.use(cors())
 app.use('/api/v1', ProductRoutes)
 
 
-app.listen(port, () => console.log(`Server is running in http://localhost:${port}`))
+AppDataSource.initialize().then(
+    () =>{
+        console.log("Conected to the database");
+        app.listen(port, () => console.log(`Server running in http://localhost: ${port}`));
+    }
+).catch((err) => {
+    console.log("Error to conect to the database");
+    console.error(err);
+})
